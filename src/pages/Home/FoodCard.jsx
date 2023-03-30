@@ -32,7 +32,6 @@ const Information = styled.div`
   align-items: center;
   /* SemiBold/L */
 
-  font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 600;
   font-size: 22px;
