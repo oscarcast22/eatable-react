@@ -74,7 +74,7 @@ const ButtonContainer = styled.nav`
   margin: auto;
 `;
 
-export default function Home() {
+export default function Home({ getId }) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -94,7 +94,7 @@ export default function Home() {
         <CardContainer>
           {products.map((product) => (
             <ProductContainer key={product.id}>
-              <FoodCard dish={product} />
+              <FoodCard dish={product} getId = {getId} />
             </ProductContainer>
           ))}
         </CardContainer>

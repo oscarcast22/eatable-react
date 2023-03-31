@@ -8,6 +8,7 @@ const Image = styled.img`
   border-radius: 100%;
   position: absolute;
   margin-top: -38px;
+  box-shadow: 0px 15px 18px rgba(57, 57, 57, 0.3);
 `;
 
 const Container = styled.div`
@@ -50,25 +51,44 @@ const Span = styled.span`
 const Buttons = styled.div`
   display: flex;
   flex-direction: row;
-  width: 80%;
+  width: 70%;
   justify-content: space-between;
   padding: 0 2px;
   margin-top: auto;
   margin-bottom: 20px;
 `;
 
-export default function FoodCard({ dish }) {
+const LinkToDish = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+export default function FoodCard({ dish, getId }) {
   const { id, name, price, picture_url } = dish;
 
+  function capitalizeName(name) {
+    const words = name.split(" ");
+    for (var i = 0; i < words.length; i++) {
+      words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    }
+    return words.join(" ");
+  }
+  
   return (
     <Container key={name}>
+      <LinkToDish to = {`/products/${id}`} 
+            key={id}
+            onClickCapture={() => getId(id)} >
       <Image src={picture_url} alt='food image' />
       <Information>
-        <Span color='#333333'>{name}</Span>
+        <Span color='#333333'>{capitalizeName(name)}</Span>
         <Span color='#FA4A0C'>${price / 100}</Span>
       </Information>
+      </LinkToDish>
       <Buttons>
-        <Link to = {`/products/${id}`}><RiEditBoxFill color='#FA4A0C'/></Link>
+        <RiEditBoxFill color='#FA4A0C'/>
         <RiDeleteBinFill color='#FA4A0C'/>
       </Buttons>
     </Container>
