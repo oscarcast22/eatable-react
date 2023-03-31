@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { RiEditBoxFill, RiDeleteBinFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const Image = styled.img`
   width: 130px;
@@ -27,6 +29,8 @@ const Container = styled.div`
 
 const Information = styled.div`
   margin-top: 104px;
+  width: 80%;
+  gap: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,20 +45,32 @@ const Information = styled.div`
 const Span = styled.span`
   color: ${(props) => props.color};
   text-align: center;
-  margin: 4px 0;
-  padding: 0 2px;
 `;
 
-export default function FoodCard({ dish, onGetProduct }) {
-  const { name, price, picture_url } = dish;
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  justify-content: space-between;
+  padding: 0 2px;
+  margin-top: auto;
+  margin-bottom: 20px;
+`;
+
+export default function FoodCard({ dish }) {
+  const { id, name, price, picture_url } = dish;
 
   return (
-    <Container key={name} onClick={onGetProduct}>
+    <Container key={name}>
       <Image src={picture_url} alt='food image' />
       <Information>
         <Span color='#333333'>{name}</Span>
         <Span color='#FA4A0C'>${price / 100}</Span>
       </Information>
+      <Buttons>
+        <Link to = {`/products/${id}`}><RiEditBoxFill color='#FA4A0C'/></Link>
+        <RiDeleteBinFill color='#FA4A0C'/>
+      </Buttons>
     </Container>
   );
 }
