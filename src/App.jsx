@@ -17,7 +17,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home getId={handleGetId}/>} />
       <Route path='/products/:id' element={<Product ProductId={id} />} />
-      <Route path='/editproduct/:id' element={<EditProduct/>}/>
+      <Route path='/editproduct/:id' element={<EditProduct ProductId={id}/>}/>
     </Routes>
   </BrowserRouter>
   )

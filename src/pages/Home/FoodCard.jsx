@@ -78,7 +78,8 @@ export default function FoodCard({ dish, getId }) {
   
   return (
     <Container key={name}>
-      <LinkToDish to = {`/products/${id}`} 
+      <LinkToDish 
+            to = {`/products/${id}`} 
             key={id}
             onClickCapture={() => getId(id)} >
       <Image src={picture_url} alt='food image' />
@@ -88,7 +89,12 @@ export default function FoodCard({ dish, getId }) {
       </Information>
       </LinkToDish>
       <Buttons>
-        <RiEditBoxFill color='#FA4A0C'/>
+        <Link 
+            to = {`/editproduct/${id}`} 
+            key={id}
+            onClickCapture={() => getId(id)} >
+          <RiEditBoxFill color='#FA4A0C'/>
+        </Link>
         <RiDeleteBinFill color='#FA4A0C'/>
       </Buttons>
     </Container>
