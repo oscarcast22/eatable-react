@@ -1,26 +1,16 @@
-import {
-  React,
-  useState,
-  useEffect
-}  from 'react';
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage
-} from "formik";
+import { React, useState, useEffect }  from 'react';
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Products from '../../services/products';
 import styled from '@emotion/styled';
-import {
-  colors,
-  typography
-} from '../../styles';
+import { colors, typography } from '../../styles';
+import { Link, useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from 'react-icons/io';
 
 const TitleContainer = styled.div `
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 48px 0;
+  margin: 32px 0;
   margin-bottom: 34px;
   padding: 2px;
 
@@ -93,6 +83,7 @@ const EditProduct = ({
     ProductId
   }) => {
     const [dish, setDish] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
       Products.getProduct(ProductId).then((prod) => {
@@ -143,6 +134,7 @@ const EditProduct = ({
 
     function handleFormSubmit(values) {
       Products.updateProduct(values, ProductId);
+      navigate(`/products/${ProductId}`);
     }
     
   return (  
@@ -155,6 +147,9 @@ const EditProduct = ({
         <FormContainer>
           <Form onSubmit={handleSubmit}>
             <div>
+              <Link onClick={() => navigate(-1)}>
+                <IoIosArrowBack />
+              </Link>
               <TitleContainer>
                 <h2>Edit Product</h2>
               </TitleContainer>
