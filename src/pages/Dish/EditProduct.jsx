@@ -10,9 +10,9 @@ const EditProduct = ({ProductId}) => {
       setDish({
         ...dish,
         name: prod.name,
+        price: prod.price,
         category: prod.category,
         description: prod.description,
-        price: prod.price,
         picture_url: prod.picture_url,
       });
     });
@@ -36,20 +36,20 @@ const EditProduct = ({ProductId}) => {
     return errors;
   }
 
-  const { description, name, category, picture_url, price } = dish;
+  const { name, price, category, description, picture_url } = dish;
 
   const initialValues = {
-    description: description,
     name: name,
     price: price,
     category: category,
+    description: description,
     picture_url: picture_url,
   };
 
   function handleFormSubmit(values) {
-    console.log(values);
+    Products.updateProduct(values, ProductId);
   }
-  console.log(initialValues);
+  
   return (
     <Formik
       initialValues={initialValues}
@@ -58,9 +58,6 @@ const EditProduct = ({ProductId}) => {
       validate={validate}
     >
       {({
-        values,
-        errors,
-        touched,
         handleSubmit,
         isValid,
       }) => (
@@ -82,13 +79,22 @@ const EditProduct = ({ProductId}) => {
           <div>
             <Field
               name="description"
-              type="textarea"
+              component="textarea"
+              rows = "6"
             />
             <ErrorMessage name="description" className="form-error" component="p" />
           </div>
           <div>
             <Field
+              name="category"
+            />
+            <ErrorMessage name="category" className="form-error" component="p" />
+          </div>
+          <div>
+            <Field
               name="picture_url"
+              component="textarea"
+              rows="2"
             />
             <ErrorMessage name="picture_url" className="form-error" component="p" />
           </div>

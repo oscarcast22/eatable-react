@@ -19,6 +19,16 @@ const Products = {
       console.error(error);
     }
   },
+
+  async updateProduct(productData, productID) {
+    try {
+      const response = await apiFetch(`/products/${productID}`, {method: "PATCH", body:productData});
+      console.log(response)
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default Products;
