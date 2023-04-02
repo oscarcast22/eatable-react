@@ -1,4 +1,4 @@
-import { React, useState, useEffect }  from 'react';
+import React  from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Products from '../../services/products';
 import styled from '@emotion/styled';
@@ -85,24 +85,8 @@ const Input = styled.div`
   margin-top: 16px;
 `
 
-const EditProduct = ({
-    ProductId
-  }) => {
-    const [dish, setDish] = useState({});
+const CreateProduct = () => {
     const navigate = useNavigate();
-
-    useEffect(() => {
-      Products.getProduct(ProductId).then((prod) => {
-        setDish({
-          ...dish,
-          name: prod.name,
-          price: prod.price,
-          category: prod.category,
-          description: prod.description,
-          picture_url: prod.picture_url,
-        });
-      });
-    }, []);
 
     function validate(values) {
       const errors = {};
@@ -122,25 +106,16 @@ const EditProduct = ({
       return errors;
     }
 
-    const {
-      name,
-      price,
-      category,
-      description,
-      picture_url
-    } = dish;
-
     const initialValues = {
-      name: name,
-      price: price,
-      category: category,
-      description: description,
-      picture_url: picture_url,
+      name: '',
+      price: '',
+      category: '',
+      description: '',
+      picture_url: '',
     };
 
     function handleFormSubmit(values) {
-      Products.updateProduct(values, ProductId);
-      navigate(`/products/${ProductId}`);
+      Products.createProduct(values).then(navigate("/"));
     }
     
   return (  
@@ -157,7 +132,7 @@ const EditProduct = ({
                 <IoIosArrowBack />
               </Link>
               <TitleContainer>
-                <h2>Edit Product</h2>
+                <h2>Create Product</h2>
               </TitleContainer>
               <div>
                 <EditForm>
@@ -200,4 +175,4 @@ const EditProduct = ({
   );
 }
 
-export default EditProduct;
+export default CreateProduct;

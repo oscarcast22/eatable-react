@@ -29,6 +29,16 @@ const Products = {
       console.error(error);
     }
   },
+
+  async createProduct(productData) {
+    try {
+      const response = await apiFetch(`/products`, {method: "POST", body:productData});
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
 
 export default Products;

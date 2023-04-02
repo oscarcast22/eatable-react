@@ -22,6 +22,7 @@ const Image = styled.img`
   border-radius: 100%;
   position: absolute;
   margin-top: -50px;
+  box-shadow: 0px 15px 18px rgba(57, 57, 57, 0.4);
 `;
 
 const Information = styled.div`
@@ -58,6 +59,56 @@ const Back = styled.div`
   }
 `;
 
+const Button = styled.button`
+  ${typography.text.sm}
+  border: none;
+  background-color: ${colors.orange};
+  color: ${colors.white};
+  padding: 24px 0;
+  border-radius: 30px;
+  letter-spacing: 0.5px;
+  width: 310px;
+  height: 70px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    background-color: #ec4910;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 20px;
+  height: 84px;
+  background-image: radial-gradient(
+    circle,
+    ${colors.white} 0%,
+    ${colors.gray.light} 100%
+  );
+  left: 0;
+  right: 0;
+  margin: auto;
+`;
+
+const DescriptionContainer = styled.div`
+  .h3 {
+    align-content: left;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 23px;
+  }
+  .p {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 20px;
+  }
+`
+
 const Product = ({ ProductId }) => {
   const navigate = useNavigate();
 
@@ -93,9 +144,14 @@ const Product = ({ ProductId }) => {
         <Information>
           <Info color={`${colors.black}`}>{name}</Info>
           <Info color={`${colors.orange}`}>${price / 100}</Info>
+          <DescriptionContainer>
           <h3>Description</h3>
-          <Info>{description}</Info>
+          <p>{description}</p>
+          </DescriptionContainer>
         </Information>
+        <ButtonContainer>
+          <Link to='/'> <Button>Go Back!</Button></Link>
+        </ButtonContainer>
       </FoodContainer>
     </div>
   );

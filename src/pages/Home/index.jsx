@@ -3,6 +3,7 @@ import Products from '../../services/products';
 import styled from '@emotion/styled';
 import { colors, typography } from '../../styles';
 import FoodCard from './FoodCard';
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 768px;
@@ -56,7 +57,7 @@ const Button = styled.button`
   }
 `;
 
-const ButtonContainer = styled.nav`
+const ButtonContainer = styled.div`
   position: fixed;
   bottom: 0;
   display: flex;
@@ -100,7 +101,7 @@ export default function Home({ getId }) {
         </CardContainer>
       </Container>
       <ButtonContainer>
-        <Button>Create Product</Button>
+      <Link to='/createproduct'> <Button>Create Product</Button></Link>
       </ButtonContainer>
       </>
     )
